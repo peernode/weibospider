@@ -23,9 +23,13 @@ class WeibouserSpider(scrapy.Spider):
     def parse(self, response):
         try:
             jsobj = json.loads(response.body) 
+            user = response.meta['user']
+            page = int(response.meta['page'])
             # JSON.cards[3].mblog.page_info.media_info
             for i in jsobj["cards"]:
                 item = WeiboItem()
+                item["user"] = user
+                item["page"] = page
                 item["media_id"] = i["mblog"]["page_info"]["media_info"]["media_id"]
                 item["title"] = i["mblog"]["page_info"]["media_info"]["next_title"]
                 item["duration"] = i["mblog"]["page_info"]["media_info"]["duration"]
@@ -35,8 +39,7 @@ class WeibouserSpider(scrapy.Spider):
                 print("item:",item)
                 yield item
 
-            user = response.meta['user']
-            page = int(response.meta['page'])
+            
             page += 1
             url = self.base_url.format(user=user, page=page)
             yield scrapy.Request(url=url, callback=self.parse, meta={"page":page, "user":user})

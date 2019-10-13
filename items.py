@@ -94,6 +94,8 @@ import scrapy
 class WeiboItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    user = scrapy.Field()
+    page = scrapy.Field()
     file_urls = scrapy.Field()  # 指定文件下载的连接
     files = scrapy.Field()      #文件下载完成后会往里面写相关的信息
     media_id = scrapy.Field()
