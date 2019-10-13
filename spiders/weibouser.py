@@ -26,11 +26,11 @@ class WeibouserSpider(scrapy.Spider):
             # JSON.cards[3].mblog.page_info.media_info
             for i in jsobj["cards"]:
                 item = WeiboItem()
-                item.media_id = i["mblog"]["page_info"]["media_info"]["media_id"]
-                item.title = i["mblog"]["page_info"]["media_info"]["next_title"]
-                item.duration = i["mblog"]["page_info"]["media_info"]["duration"]
-                item.sd_url = i["mblog"]["page_info"]["media_info"]["mp4_sd_url"]
-                item.hd_url = i["mblog"]["page_info"]["media_info"]["hd_url"]
+                item["media_id"] = i["mblog"]["page_info"]["media_info"]["media_id"]
+                item["title"] = i["mblog"]["page_info"]["media_info"]["next_title"]
+                item["duration"] = i["mblog"]["page_info"]["media_info"]["duration"]
+                item["sd_url"] = i["mblog"]["page_info"]["media_info"]["mp4_sd_url"]
+                item["hd_url"] = i["mblog"]["page_info"]["media_info"]["hd_url"]
                 print("item:",item)
                 yield item
 
@@ -40,7 +40,7 @@ class WeibouserSpider(scrapy.Spider):
             url = self.base_url.format(user=user, page=page)
             yield scrapy.Request(url=url, callback=self.parse, meta={"page":page, "user":user})
         except Exception as e:
-            print e
+            print(e)
 
         
         
