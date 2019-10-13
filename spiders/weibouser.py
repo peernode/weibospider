@@ -34,13 +34,12 @@ class WeibouserSpider(scrapy.Spider):
                 item["hd_url"] = i["mblog"]["page_info"]["media_info"]["mp4_hd_url"]
                 print("item:",item)
                 yield item
-                break
 
-            # user = response.meta['user']
-            # page = int(response.meta['page'])
-            # page += 1
-            # url = self.base_url.format(user=user, page=page)
-            # yield scrapy.Request(url=url, callback=self.parse, meta={"page":page, "user":user})
+            user = response.meta['user']
+            page = int(response.meta['page'])
+            page += 1
+            url = self.base_url.format(user=user, page=page)
+            yield scrapy.Request(url=url, callback=self.parse, meta={"page":page, "user":user})
         except Exception as e:
             print(e)
 
