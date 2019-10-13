@@ -27,19 +27,21 @@ class WeibouserSpider(scrapy.Spider):
             page = int(response.meta['page'])
             # JSON.cards[3].mblog.page_info.media_info
             for i in jsobj["cards"]:
-                item = WeiboItem()
-                item["user"] = user
-                item["page"] = page
-                item["media_id"] = i["mblog"]["page_info"]["media_info"]["media_id"]
-                item["title"] = i["mblog"]["page_info"]["media_info"]["next_title"]
-                item["duration"] = i["mblog"]["page_info"]["media_info"]["duration"]
-                item["sd_url"] = i["mblog"]["page_info"]["media_info"]["mp4_sd_url"]
-                item["file_urls"] = [i["mblog"]["page_info"]["media_info"]["mp4_sd_url"]]
-                item["hd_url"] = i["mblog"]["page_info"]["media_info"]["mp4_hd_url"]
-                print("item:",item)
-                yield item
-
-            
+                try:
+                    item = WeiboItem()
+                    item["user"] = user
+                    item["page"] = page
+                    item["media_id"] = i["mblog"]["page_info"]["media_info"]["media_id"]
+                    item["title"] = i["mblog"]["page_info"]["media_info"]["next_title"]
+                    item["duration"] = i["mblog"]["page_info"]["media_info"]["duration"]
+                    item["sd_url"] = i["mblog"]["page_info"]["media_info"]["mp4_sd_url"]
+                    item["file_urls"] = [i["mblog"]["page_info"]["media_info"]["mp4_sd_url"]]
+                    item["hd_url"] = i["mblog"]["page_info"]["media_info"]["mp4_hd_url"]
+                    print("item:",item)
+                    yield item
+                except Exception as e:
+                    print(e)
+                    
             page += 1
             url = self.base_url.format(user=user, page=page)
             yield scrapy.Request(url=url, callback=self.parse, meta={"page":page, "user":user})
