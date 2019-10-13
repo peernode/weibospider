@@ -69,7 +69,7 @@ FILES_STORE = '/data/xujy/videos'
 ITEM_PIPELINES = {
 #    'weibo.pipelines.WeiboPipeline': 300,
     # 'scrapy.pipelines.files.FilesPipeline':1,
-    'weibo.pipelines.FileDownloadPipeline': 300,
+    'weibo.FileDownloadPipeline.FileDownloadPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
