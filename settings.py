@@ -67,7 +67,7 @@ FILES_STORE = '/data/xujy/videos'
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-#    'weibo.pipelines.WeiboPipeline': 300,
+   'weibo.pipelines.WeiboPipeline': 301,
     # 'scrapy.pipelines.files.FilesPipeline':1,
     'weibo.FileDownloadPipeline.FileDownloadPipeline': 300,
 }
