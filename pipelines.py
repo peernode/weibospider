@@ -9,7 +9,7 @@ import json
 import codecs
 
 class WeiboPipeline(object):
-    def __init__(self, spider):
+    def __init__(self):
         self.file = codecs.open('data_cn.json', 'w', encoding='utf-8')
 
     def process_item(self, item, spider):
