@@ -46,7 +46,7 @@ class WeibouserSpider(scrapy.Spider):
                 except Exception as e:
                     print(e)
 
-            if jsobj["cards"]:
+            if len(jsobj["cards"]) > 1:
                 page += 1
                 url = self.base_url.format(user=user, page=page)
                 yield scrapy.Request(url=url, callback=self.parse, meta={"page":page, "user":user})
