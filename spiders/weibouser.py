@@ -30,9 +30,6 @@ class WeibouserSpider(scrapy.Spider):
             user = response.meta['user']
             page = int(response.meta['page'])
             # JSON.cards[3].mblog.page_info.media_info
-            if not jsobj["cards"]:
-                return
-
             for i in jsobj["cards"]:
                 try:
                     item = WeiboItem()
@@ -49,9 +46,10 @@ class WeibouserSpider(scrapy.Spider):
                 except Exception as e:
                     print(e)
 
-            page += 1
-            url = self.base_url.format(user=user, page=page)
-            yield scrapy.Request(url=url, callback=self.parse, meta={"page":page, "user":user})
+            if jsobj["cards"]:
+                page += 1
+                url = self.base_url.format(user=user, page=page)
+                yield scrapy.Request(url=url, callback=self.parse, meta={"page":page, "user":user})
         except Exception as e:
             print(e)
 
