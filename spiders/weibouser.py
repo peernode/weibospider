@@ -31,6 +31,7 @@ class WeibouserSpider(scrapy.Spider):
                 item.duration = i.mblog.page_info.media_info.duration
                 item.sd_url = i.mblog.page_info.media_info.mp4_sd_url
                 item.hd_url = i.mblog.page_info.media_info.mp4.hd_url
+				print("item:",item)
                 yield item
 
             user = response.meta['user']
