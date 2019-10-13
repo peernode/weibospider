@@ -30,7 +30,7 @@ class WeibouserSpider(scrapy.Spider):
                 item["title"] = i["mblog"]["page_info"]["media_info"]["next_title"]
                 item["duration"] = i["mblog"]["page_info"]["media_info"]["duration"]
                 item["sd_url"] = i["mblog"]["page_info"]["media_info"]["mp4_sd_url"]
-                item["hd_url"] = i["mblog"]["page_info"]["media_info"]["hd_url"]
+                item["hd_url"] = i["mblog"]["page_info"]["media_info"]["mp4_hd_url"]
                 print("item:",item)
                 yield item
 
